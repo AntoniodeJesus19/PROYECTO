@@ -7,7 +7,7 @@ EQUIPO 2
 ## Objetivo
 El objetivo del programa es controlar un conjunto de dispositivos (sensores, actuadores y motores) basados en el ESP32. A través de la conexión WiFi y MQTT, el sistema monitorea la temperatura mediante un sensor DHT22, controla motores dependiendo de rangos de temperatura específicos, y gestiona LEDs como indicadores visuales. Además, publica los datos del sensor en un servidor MQTT para ser utilizados por otros dispositivos o aplicaciones.
 
-## CODIGO
+## CODIGO Y CONEXIONES
 ```
 #include <ArduinoJson.h>
 #include <WiFi.h>
@@ -238,7 +238,13 @@ else
   }
 }
 ```
+![](https://github.com/AntoniodeJesus19/PROYECTO-BORRADOR/blob/main/Captura%20de%20pantalla%202024-12-15%20164942.png?raw=true)
 
+![](https://github.com/AntoniodeJesus19/PROYECTO-BORRADOR/blob/main/Captura%20de%20pantalla%202024-12-15%20165015.png?raw=true)
+
+![](https://github.com/AntoniodeJesus19/PROYECTO-BORRADOR/blob/main/Captura%20de%20pantalla%202024-12-15%20165037.png?raw=true)
+
+![](https://github.com/AntoniodeJesus19/PROYECTO-BORRADOR/blob/main/Captura%20de%20pantalla%202024-12-15%20165056.png?raw=true)
 
 ## Descripción del Código
 ### 1.	Inicialización de Bibliotecas: El programa utiliza varias bibliotecas clave:
