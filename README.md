@@ -362,7 +362,10 @@ El programa es una solución funcional que integra sensores, actuadores, y comun
 # Créditos
 
 Desarrollado por: Antonio de Jesús Mentado Huerta [GitHub](https://github.com/AntoniodeJesus19)
+
 Miguel de Jesús Montesinos Molina [GitHub](https://github.com/MiguelMontesinos)
+
 Zuriel Osio Becerra [GitHub](https://github.com/ZurielO)
+
 Alberto Fandiño Vidal [GitHub]()
 
