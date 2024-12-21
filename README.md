@@ -254,10 +254,10 @@ else
 ### 3.	Lectura de Sensores y Control de Actuadores:
 -	El sensor DHT22 se configura para medir la temperatura y la humedad en el pin 15 del ESP32.
 -	Dependiendo de la temperatura medida, se activan diferentes motores paso a paso y se controlan LEDs específicos como indicadores:
--	Temperaturas entre 14°C y 20°C: Se activa el motor 1 (controlado por stepper1).
--	Temperaturas entre 34°C y 40°C: Se activa el motor 2 (controlado por stepper2).
--	Temperaturas entre 54°C y 60°C: Se activa el motor 3 (controlado por stepper3).
--	Temperaturas entre 70°C y 80°C: Se activa el motor 4 (controlado por stepper4).
+-	Temperaturas entre 1°C y 20°C: Se activa el motor 1 (controlado por stepper1).
+-	Temperaturas entre 21°C y 40°C: Se activa el motor 2 (controlado por stepper2).
+-	Temperaturas entre 41°C y 60°C: Se activa el motor 3 (controlado por stepper3).
+-	Temperaturas entre 61°C y 80°C: Se activa el motor 4 (controlado por stepper4).
 -	Los LEDs se encienden de manera proporcional al rango de temperatura detectado, con hasta cuatro LEDs posibles dependiendo de la condición.
 ### 4.	Publicación de Datos:
 -	Cada dos segundos, el programa recopila los datos de temperatura, calcula un valor de "RPM" basado en la temperatura (multiplicando la temperatura por 50), y genera un mensaje JSON con la información del dispositivo, la temperatura y los valores calculados.
@@ -288,9 +288,75 @@ El código en Wokwi genera datos de sensores y actuadores en el ESP32, los empaq
 
 Este flujo de trabajo permite una comunicación bidireccional entre Wokwi (ESP32) y RedNote, donde el ESP32 envía datos y RedNote los procesa para su visualización y análisis.
 
-![Texto alternativo](https://github.com/ZurielO/Monitoreo-de-la-Temperatura-y-RPM-S-de-un-Horno-Industrial/blob/main/Captura%20de%20pantalla%202024-12-15%20165555.png).
+![Texto alternativo](https://github.com/AntoniodeJesus19/PROYECTO/blob/main/Captura%20de%20pantalla%202024-12-20%20201457.png?raw=true).
+
+## Base de Datos
+
+# Instalación de phpMyAdmin
+
+## Instalación
+1. Entrar a la pagina https://www.apachefriends.org/ .
+2. Descargar ```XAMPP for Windows (8.2.4)```. 
+![](https://github.com/DiegoJm10/Instalacion-de-base-de-datos/blob/main/DESCARGA%20DE%20XAMPP.png?raw=true)
+
+![](https://github.com/DiegoJm10/Instalacion-de-base-de-datos/blob/main/XAMPP%20Installers%20and%20Downloads%20for%20Apache%20Friends%20-%20Google%20Chrome%2023_06_2023%2008_48_59%20a.%20m..png?raw=true)
+
+3. Se les decargara un archivo llamado **xampp-windows-x64-8.2.4-0VS16-installer**.
+![](https://github.com/DiegoJm10/Instalacion-de-base-de-datos/blob/main/ARCHIVO.png?raw=true)
+
+4. Ejecutamos el archivo en modo administrador e installamos.
+
+## Ejecutar 
+
+1. Debemos abrir el programa llamado XAMPP.
+2. Dentro de la interfaz nos vamos a la fila llamada **Mysql**.
+3. Le damos doble click al boton **Admin**.
+
+## Crear tabla 
+
+Se va a crear una tabla con los siguentes cirterios: 
+
+![](https://github.com/DiegoJm10/Instalacion-de-base-de-datos/blob/main/localhost%20_%20127.0.0.1%20_%20tamulbatm7%20_%20tamulba7%20_%20phpMyAdmin%205.2.1%20-%20Google%20Chrome%2016_06_2023%2008_50_24%20a.%20m..png?raw=true)
+
+Colocamos los siguientes datos en las columnas de la imagen de arriba.
+
+![](https://github.com/AntoniodeJesus19/PROYECTO/blob/main/Captura%20de%20pantalla%202024-12-21%20085039.png?raw=true)
+
+## Usar en node-red
+
+Se colocara el bloque de Mysql y un bloque de función para obtener los datos con el siguente codigo. Sino esta descargado el bloque Mysql lo instalamos desde el ```manage palette```, es el siguiente ```node-red-node-mysql``` 
+
+``` 
+var query = "INSERT INTO `horno`(`ID`, `Anho`, `DEVICE`, `TEMPERATURA`, `RPM`, `NOMBRE`) VALUES (NULL, current_timestamp(), '";
+query = query+msg.payload.DEVICE + "','";
+query = query+msg.payload.TEMPERATURA + "','";
+query = query + msg.payload.RPM + "','";
+query = query+msg.payload.NOMBRE + "');'";
+
+msg.topic=query;
+return msg;
+``` 
+
+## Resultados
+
+![](https://github.com/ZurielO/Monitoreo-de-la-Temperatura-y-RPM-S-de-un-Horno-Industrial/blob/main/Captura%20de%20pantalla%202024-12-15%20165555.png)
+
+![](https://github.com/AntoniodeJesus19/PROYECTO/blob/main/Captura%20de%20pantalla%202024-12-20%20201329.png?raw=true)
+
+Se puede expotar la base de datos a excel si asi se desea.
+![](https://github.com/AntoniodeJesus19/PROYECTO/blob/main/Captura%20de%20pantalla%202024-12-20%20201311.png?raw=true)
+![](https://github.com/AntoniodeJesus19/PROYECTO/blob/main/Captura%20de%20pantalla%202024-12-21%20090755.png?raw=true)
+
 
 
 
 ## Conclusión
 El programa es una solución funcional que integra sensores, actuadores, y comunicación a través de MQTT en un entorno IoT con ESP32. Es adecuado para aplicaciones en las que se requiere monitorear y reaccionar ante cambios de temperatura, controlar dispositivos como motores paso a paso y generar reportes en tiempo real a través de MQTT. No obstante, para una implementación en producción, se recomienda mejorar aspectos de seguridad y optimizar la gestión de recursos del sistema.
+
+# Créditos
+
+Desarrollado por: Antonio de Jesús Mentado Huerta [GitHub](https://github.com/AntoniodeJesus19)
+Miguel de Jesús Montesinos Molina [GitHub](https://github.com/MiguelMontesinos)
+Zuriel Osio Becerra [GitHub](https://github.com/ZurielO)
+Alberto Fandiño Vidal [GitHub]()
+
